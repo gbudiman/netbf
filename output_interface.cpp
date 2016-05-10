@@ -32,6 +32,7 @@ OutputInterface::OutputInterface(BellmanFordStructure* bfs, uint32_t origin) {
   ofile << distance_str;
   ofile << traversal_str;
   ofile << iteration_str;
+  ofile << "\n";
   ofile.close();
 }
 

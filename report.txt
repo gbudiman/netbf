@@ -1,0 +1,60 @@
+Project is separated by 4 major classes:
+- InputInterface
+  # Parses input file and creates new BellmanFordStructure object
+- BellmanFordStructure
+  # A collection of nodes (and links).
+  # The Bellman-Ford algorithm is impelemented in this class.
+  # Provides distance and predecessor tracking data structure.
+- Node
+  # Simple class to represent a single node.
+  # Has unique ID and link target and its distance.
+- OutputInterface
+  # Generates output file
+
+Result from running N7.csv
+0,33,13,10,24,26,38
+0
+0->3->1
+0->3->2
+0->3
+0->3->4
+0->3->4->5
+Iteration: 4
+
+Result from running N10.csv
+0,5,3,10,2,8,7,1,7,8
+0
+0->4->1
+0->2
+0->2->6->3
+0->4
+0->4->1->5
+0->2->6
+0->7
+0->4->1->8
+Iteration: 4
+
+Result from running N20.csv
+0,4,6,7,6,4,10,7,7,4,9,7,8,6,5,3,5,7,4,5
+0
+0->15->1
+0->15->1->2
+0->5->19->3
+0->4
+0->5
+0->18->6
+0->5->7
+0->15->9->8
+0->15->9
+0->15->9->10
+0->18->11
+0->15->12
+0->15->13
+0->5->14
+0->15
+0->18->16
+0->15->9->17
+0->18
+0->5->19
+Iteration: 4
+
