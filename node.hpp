@@ -17,9 +17,8 @@ class Node {
 public:
   Node(uint32_t);
   void add_link(uint32_t, uint32_t);
-  std::map<uint32_t, uint32_t>* get_edges();
+  std::map<uint32_t, uint32_t>* edges;
 private:
   uint32_t id;
-  std::map<uint32_t, uint32_t>* edges;
 };
 #endif /* node_hpp */

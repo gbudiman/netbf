@@ -32,13 +32,9 @@ void BellmanFordStructure::dump() {
   for (std::map<uint32_t, Node*>::iterator n = nodes->begin(); n != nodes->end(); ++n) {
     std::cout << "Node ID: " << n->first << "\n";
     
-    std::map<uint32_t, uint32_t>* edges = n->second->get_edges();
+    std::map<uint32_t, uint32_t>* edges = n->second->edges;
     for (std::map<uint32_t, uint32_t>::iterator e = edges->begin(); e != edges->end(); ++e) {
       std::cout << "Edge " << e->first << ": " << e->second << "\n";
     }
   }
-}
-
-std::map<uint32_t, Node*>* BellmanFordStructure::get_nodes() {
-  return nodes;
 }

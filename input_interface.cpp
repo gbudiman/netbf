@@ -49,7 +49,7 @@ void InputInterface::parse(const char* line, uint32_t node_id) {
       // ignored
     } else {
       distance = (uint32_t) std::strtol(element, NULL, 10);
-      bfs->get_nodes()->at(node_id)->add_link(destination_id, distance);
+      bfs->nodes->at(node_id)->add_link(destination_id, distance);
     }
     
     destination_id++;

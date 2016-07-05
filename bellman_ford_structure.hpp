@@ -19,11 +19,12 @@ public:
   BellmanFordStructure();
   void add_node(uint32_t);
   void add_link(uint32_t, uint32_t);
-  std::map<uint32_t, Node*>* get_nodes();
   
   void dump();
-private:
+  
   std::map<uint32_t, Node*>* nodes;
+private:
+  
 };
 
 #endif /* bellman_ford_structure_hpp */

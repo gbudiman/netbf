@@ -17,7 +17,3 @@ Node::Node(uint32_t id) {
 void Node::add_link(uint32_t target, uint32_t distance) {
   edges->insert(std::pair<uint32_t, uint32_t>(target, distance));
 }
-
-std::map<uint32_t, uint32_t>* Node::get_edges() {
-  return edges;
-}
