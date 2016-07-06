@@ -24,7 +24,7 @@ public:
   
 private:
   void load();
-  void parse(const char *line, uint32_t);
+  uint32_t parse(const char *line, uint32_t);
   
   char* filepath;
   uint32_t node_count;

@@ -45,9 +45,9 @@ void OutputInterface::traverse_nodes(BellmanFordStructure* bfs, uint32_t origin,
     std::reverse(paths->begin(), paths->end());
     
     for (std::vector<uint32_t>::iterator p = paths->begin(); p != paths->end(); ++p) {
-      s->append(OutputInterface::itos(*p) + ">");
+      s->append(OutputInterface::itos(*p) + "->");
     }
-    s->erase(s->length() - 1);
+    s->erase(s->length() - 2);
     
     s->append("\n");
   }
