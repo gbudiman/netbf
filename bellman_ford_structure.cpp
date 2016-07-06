@@ -113,10 +113,6 @@ void BellmanFordStructure::generate_workload(uint32_t origin, std::set<uint32_t>
   for (std::map<uint32_t, uint32_t>::iterator d = distance->begin(); d != distance->end(); ++d) {
     if (d->second != INF) {
       workload->insert(d->first);
-//      std::map<uint32_t, uint32_t> *edges = nodes->at(d->first)->edges;
-//      for (std::map<uint32_t, uint32_t>::iterator e = edges->begin(); e != edges->end(); ++e) {
-//        workload->insert(e->first);
-//      }
     }
   }
 }

@@ -44,7 +44,8 @@ void InputInterface::parse(const char* line, uint32_t node_id) {
   bfs->add_node(node_id);
   
   while (element != NULL) {
-    if (strcmp(element, "*") == 0) {
+    //if (strcmp(&element[0], "*") == 0) {
+    if (element[0] == '*') {
       // ignored
     } else if (destination_id == node_id) {
       // ignored
