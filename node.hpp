@@ -9,6 +9,7 @@
 #ifndef node_hpp
 #define node_hpp
 
+#include <iostream>
 #include <stdio.h>
 #include <stdint.h>
 #include <map>

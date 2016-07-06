@@ -32,6 +32,7 @@ void InputInterface::load() {
     std::cout << "File [" << filepath << "] is not accessible\n";
   }
   
+  bfs->node_count = node_id;
   bfs->dump();
 }
 

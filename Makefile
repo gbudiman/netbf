@@ -1,7 +1,7 @@
 all: BellmanFord
 
-BellmanFord: main input_interface bellman_ford_structure node
-	g++ main.o input_interface.o bellman_ford_structure.o node.o -o BellmanFord
+BellmanFord: main input_interface bellman_ford_structure node output_interface
+	g++ main.o input_interface.o bellman_ford_structure.o node.o output_interface.o -o BellmanFord
 
 main: main.cpp 
 	g++ -c main.cpp
@@ -15,5 +15,9 @@ bellman_ford_structure: bellman_ford_structure.cpp
 node: node.cpp
 	g++ -c node.cpp node.hpp
 
+output_interface: output_interface.cpp
+	g++ -c output_interface.cpp output_interface.hpp
+
 clean:
 	rm *o BellmanFord
+	rm output.txt

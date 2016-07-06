@@ -20,6 +20,7 @@
 class InputInterface {
 public:
   InputInterface(const char *path);
+  BellmanFordStructure* bfs;
   
 private:
   void load();
@@ -27,7 +28,6 @@ private:
   
   char* filepath;
   uint32_t node_count;
-  BellmanFordStructure* bfs;
 };
 
 #endif /* input_interface_hpp */
