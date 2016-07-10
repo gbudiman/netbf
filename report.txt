@@ -11,6 +11,9 @@ Project is separated by 4 major classes:
 - OutputInterface
   # Generates output file
 
+Observation:
+- The number of iteration indicates the maximum hops needed to reach any node within the graph from source node. In other word, any node is reachable in N hops or less (with the first hop being to reach the source node itself). This is under the assumption that all nodes are physically reachable from the source node.
+
 Result from running N7.csv
 0,33,13,10,24,26,38
 0

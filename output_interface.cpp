@@ -16,7 +16,11 @@ OutputInterface::OutputInterface(BellmanFordStructure* bfs, uint32_t origin) {
   
   traverse_nodes(bfs, origin, &traversal_str);
   for (std::map<uint32_t, uint32_t>::iterator d = distance->begin(); d != distance->end(); ++d) {
-    distance_str += OutputInterface::itos(d->second) + ",";
+    if (d->second == INF) {
+      distance_str += "unreachable,";
+    } else {
+      distance_str += OutputInterface::itos(d->second) + ",";
+    }
   }
   distance_str.erase(distance_str.length() - 1);
   distance_str += "\n";
@@ -47,10 +51,14 @@ void OutputInterface::traverse_nodes(BellmanFordStructure* bfs, uint32_t origin,
     recurse(pred, node, origin, paths);
     std::reverse(paths->begin(), paths->end());
     
-    for (std::vector<uint32_t>::iterator p = paths->begin(); p != paths->end(); ++p) {
-      s->append(OutputInterface::itos(*p) + "->");
+    if (paths->front() == origin) {
+      for (std::vector<uint32_t>::iterator p = paths->begin(); p != paths->end(); ++p) {
+        s->append(OutputInterface::itos(*p) + "->");
+      }
+      s->erase(s->length() - 2);
+    } else {
+      s->append("[no route from " + OutputInterface::itos(origin) + " to " + OutputInterface::itos(node) + "]");
     }
-    s->erase(s->length() - 2);
     
     s->append("\n");
   }
@@ -58,15 +66,17 @@ void OutputInterface::traverse_nodes(BellmanFordStructure* bfs, uint32_t origin,
 
 void OutputInterface::recurse(std::map<uint32_t, uint32_t>* pred, uint32_t node, uint32_t origin, std::vector<uint32_t> *paths) {
   
-  uint32_t previous_node = pred->at(node);
-  
-  if (previous_node == origin) {
-    if (node != origin) {
+  if (pred->at(node) != INF) {
+    uint32_t previous_node = pred->at(node);
+    
+    if (previous_node == origin) {
+      if (node != origin) {
+        paths->push_back(previous_node);
+      }
+    } else {
       paths->push_back(previous_node);
+      recurse(pred, previous_node, origin, paths);
     }
-  } else {
-    paths->push_back(previous_node);
-    recurse(pred, previous_node, origin, paths);
   }
 }
 
