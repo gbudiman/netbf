@@ -3,8 +3,8 @@ all: BellmanFord
 BellmanFord: main input_interface bellman_ford_structure node output_interface
 	g++ main.o input_interface.o bellman_ford_structure.o node.o output_interface.o -o BellmanFord
 
-main: main.cpp 
-	g++ -c main.cpp
+main: main.cpp main.hpp
+	g++ -c main.cpp main.hpp
 
 input_interface: input_interface.cpp
 	g++ -c input_interface.cpp input_interface.hpp
@@ -19,5 +19,5 @@ output_interface: output_interface.cpp
 	g++ -c output_interface.cpp output_interface.hpp
 
 clean:
-	rm *o BellmanFord
+	rm *o *gch BellmanFord
 	rm output.txt

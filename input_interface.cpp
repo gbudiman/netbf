@@ -17,13 +17,14 @@ InputInterface::InputInterface(const char* path) {
 }
 
 void InputInterface::load() {
-  printf("Successfully called\n");
   std::string line = *new std::string();
   std::ifstream ifs(filepath, std::ifstream::in);
   uint32_t node_id = 0;
   
   if (ifs.is_open()) {
-    std::cout << "Reading file [" << filepath << "]\n";
+    if (PROJ_DEBUG) {
+      std::cout << "Reading file [" << filepath << "]\n";
+    }
     
     while (std::getline(ifs, line)) {
       node_id += parse(line.c_str(), node_id);
@@ -33,7 +34,10 @@ void InputInterface::load() {
   }
   
   bfs->node_count = node_id;
-  bfs->dump();
+  
+  if (PROJ_DEBUG) {
+    bfs->dump();
+  }
 }
 
 uint32_t InputInterface::parse(const char* line, uint32_t node_id) {

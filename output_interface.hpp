@@ -17,6 +17,7 @@
 #include <iostream>
 #include <fstream>
 #include "bellman_ford_structure.hpp"
+#include "main.hpp"
 
 class OutputInterface {
 public:

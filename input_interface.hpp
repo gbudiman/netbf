@@ -16,6 +16,7 @@
 #include <fstream>
 #include <vector>
 #include "bellman_ford_structure.hpp"
+#include "main.hpp"
 
 class InputInterface {
 public:

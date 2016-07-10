@@ -44,7 +44,9 @@ void BellmanFordStructure::dump() {
 void BellmanFordStructure::run() {
   analyze(0);
   
-  std::cout << "Bellman-Ford run completed\n";
+  if (PROJ_DEBUG) {
+    std::cout << "Bellman-Ford run completed\n";
+  }
 }
 
 void BellmanFordStructure::analyze(uint32_t origin) {
@@ -52,12 +54,18 @@ void BellmanFordStructure::analyze(uint32_t origin) {
   uint32_t iteration = 0;
   init(origin);
   
-  dump_trackers();
+  if (PROJ_DEBUG) {
+    dump_trackers();
+  }
+  
   for (iteration = 0; iteration < node_count && !terminated_early; iteration++) {
     terminated_early = step(origin, iteration);
   }
   
-  std::cout << "Algorithm completed at iteration " << iteration << "\n";
+  if (PROJ_DEBUG) {
+    std::cout << "Algorithm completed at iteration " << iteration << "\n";
+  }
+  
   iteration_count = iteration;
 }
 
@@ -84,23 +92,34 @@ void BellmanFordStructure::init(uint32_t origin) {
 }
 
 bool BellmanFordStructure::step(uint32_t origin, uint32_t iteration) {
-  std::cout << "\n#### BEGIN ITERATION " << iteration << " ####\n\n";
+  if (PROJ_DEBUG) {
+    std::cout << "\n#### BEGIN ITERATION " << iteration << " ####\n\n";
+  }
+  
   std::set<uint32_t>* workload = new std::set<uint32_t>();
   uint32_t updates = 0;
 
   generate_workload(origin, workload);
   for (std::set<uint32_t>::iterator w = workload->begin(); w != workload->end(); ++w) {
-    std::cout << "Relaxing node " << *w << "\n";
+    if (PROJ_DEBUG) {
+      std::cout << "Relaxing node " << *w << "\n";
+    }
     
     std::map<uint32_t, uint32_t>* edges = nodes->at(*w)->edges;
     for (std::map<uint32_t, uint32_t>::iterator e = edges->begin(); e != edges->end(); ++e) {
       updates += process_edge(origin, *w, e->first, e->second);
-      dump_trackers();
+      
+      if (PROJ_DEBUG) {
+        dump_trackers();
+      }
     }
   }
   
   if (updates == 0) {
-    std::cout << "Early termination called at iteration " << iteration << "\n";
+    if (PROJ_DEBUG) {
+      std::cout << "Early termination called at iteration " << iteration << "\n";
+    }
+    
     return true;
   }
   
@@ -136,23 +155,6 @@ uint32_t BellmanFordStructure::process_edge(uint32_t origin, uint32_t source, ui
   }
   
   return 0;
-}
-
-bool BellmanFordStructure::traverse_path_between(uint32_t origin, uint32_t source, uint32_t target) {
-  uint32_t pred = preds->at(origin)->at(target);
-  
-  if (pred == INF) {
-    std::cout << "\n";
-    return false; // no path existed
-  } else {
-    std::cout << " => " << pred;
-    if (pred == source) {
-      std::cout << "\n";
-      return true;
-    } else {
-      return traverse_path_between(origin, source, pred);
-    }
-  }
 }
 
 void BellmanFordStructure::dump_trackers() {

@@ -17,6 +17,7 @@
 #include <vector>
 #include <set>
 #include "node.hpp"
+#include "main.hpp"
 
 class BellmanFordStructure {
 public:

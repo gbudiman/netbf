@@ -21,9 +21,11 @@ OutputInterface::OutputInterface(BellmanFordStructure* bfs, uint32_t origin) {
   distance_str.erase(distance_str.length() - 1);
   distance_str += "\n";
   
-  std::cout << distance_str << "\n";
-  std::cout << traversal_str << "\n";
-  std::cout << iteration_str << "\n";
+  if (PROJ_DEBUG) {
+    std::cout << distance_str << "\n";
+    std::cout << traversal_str << "\n";
+    std::cout << iteration_str << "\n";
+  }
   
   std::ofstream ofile;
   ofile.open("output.txt");
