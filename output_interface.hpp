@@ -19,6 +19,8 @@
 #include "bellman_ford_structure.hpp"
 #include "main.hpp"
 
+#define OUTPUT_PATH "output.txt"
+
 class OutputInterface {
 public:
   OutputInterface(BellmanFordStructure*, uint32_t);

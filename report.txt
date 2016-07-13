@@ -7,12 +7,33 @@ Project is separated by 4 major classes:
   # Provides distance and predecessor tracking data structure.
 - Node
   # Simple class to represent a single node.
-  # Has unique ID and link target and its distance.
+  # Has unique ID.
+  # Has link target and its distance to target node.
 - OutputInterface
-  # Generates output file
+  # Reads BellmanFordStructure object.
+  # Generates output file output.txt
+
+Bellman-Ford algorithm implementation:
+1. Initialization
+   - Set up distances[N] and predecessors[N], where N is the node count in graph
+   - Prepopulate all distances and predecessors to INFINITY
+     > INFINITY is defined as unsigned 32-bit integer 0xFFFFFFFF (2**32 - 1)
+2. Induction base case
+   - Set distances[0] and predecessors[0] to 0
+3. Induction inductive step
+   - Initialize variable <changes_made> to 0
+   - For each element <x> in distances[] that is not INF:
+     > For each edge to <v> that originates from node <x>:
+       + If distances[x] + edge(x, v) < distances[v]
+         Then distances[v] = distances[x] + edge(x, v)
+              set predecessors[v] = x
+              increment <changes_made>
+4. Early termination check
+   - If <changes_made> == 0, early termination is detected and algorithm is complete
+   - Otherwise, repeat inductive step 3
 
 Observation:
-- The number of iteration indicates the maximum hops needed to reach any node within the graph from source node. In other word, any node is reachable in N hops or less (with the first hop being to reach the source node itself). This is under the assumption that all nodes are physically reachable from the source node.
+- The number of iteration indicates the maximum hops needed to reach any node within the graph from source node. In other word, any node is reachable in N hops or less (with the first hop being to reach the source node itself a.k.a. base case). This is under the assumption that all nodes are physically reachable from the source node.
 
 Result from running N7.csv
 0,33,13,10,24,26,38
@@ -22,6 +43,7 @@ Result from running N7.csv
 0->3
 0->3->4
 0->3->4->5
+0->3->1->6
 Iteration: 4
 
 Result from running N10.csv
@@ -35,6 +57,7 @@ Result from running N10.csv
 0->2->6
 0->7
 0->4->1->8
+0->2->6->9
 Iteration: 4
 
 Result from running N20.csv

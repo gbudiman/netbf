@@ -4,8 +4,14 @@ Gloria Budiman
 === COMPILING ===
 make
 
+=== CLEANUP ===
+make clean
+
 === RUNNING ===
 ./BellmanFord <path_to_input_file>
+
+=== OUTPUT ===
+Hardcoded to "output.txt" in project's root directory
 
 === EXAMPLE ===
 ./BellmanFord input/N7.csv
